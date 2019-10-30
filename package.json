@@ -1,0 +1,24 @@
+{
+    "name": "marciowb.brackets-goto-starttag-endtag",
+    "title": "Brackets Extension: Go to Start/End of a Tag",
+    "description": "Instantly locate and place the cursor on the matching start/end of the tag above the cursor. Simply place the cursor on any HTML and then press CTRL-SHIFT-ALT-/ (CMD-SHIFT-ALT-/ on Mac) or use the 'Navigate... Go to Matching Start/End Tag' menu item to locate and place the cursor on the matching opening or closing bracket.",
+    "homepage": "https://github.com/marciowb/brackets-goto-starttag-endtag",
+    "version": "0.0.1",
+    "author": "Marcio Wesley Borges <marciowb.at_gmail.com>",
+    "license": "MIT",
+    "i18n": [
+        "en",
+        "pt"
+    ],
+    "keywords": [
+        "brackets",
+        "tag",
+        "html",
+        "match",
+        "matching"
+    ],
+    "categories": "editing",
+    "engines": {
+        "brackets": ">=1.2.0"
+    }
+}
