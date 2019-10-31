@@ -52,20 +52,32 @@ define(function (require) {
     function gotoStartTagOrEndTag() {
 
         const editor = EditorManager.getActiveEditor();        
-        const marks = editor._codeMirror.getAllMarks().filter( (m) => m.className=="CodeMirror-matchingtag");
+        if (!editor)
+            return;
+        
+        const cursorPos = editor.getCursorPos();
+        if (!cursorPos) 
+            return;
 
+        let range;
+        
+        const marks = editor._codeMirror.getAllMarks().filter( (m) => m.className=="CodeMirror-matchingtag");        
         if (!!marks && marks.length>1) {
-            const cursorPos = editor.getCursorPos();
-            if (!!cursorPos) {
-                let range = marks[1].find();
-                if (isBetween(cursorPos, range))
-                    range = marks[0].find(); 
-                if (!!range) 
-                    editor.setCursorPos(range.from.line, range.from.ch + 1);
-                console.log( "De/Para: ", cursorPos, range, marks);
-            }
+            range = marks[1].find();
+            if (isBetween(cursorPos, range))
+                range = marks[0].find(); 
+            
+        } else {
+            const tagPlace = CodeMirror.findMatchingTag( editor._codeMirror, cursorPos );
+            if (!tagPlace || !tagPlace.at)
+                return;
+            range = (tagPlace.at=="close") ? tagPlace.open : tagPlace.close;
         }
 
+        if (!!range) 
+            editor.setCursorPos(range.from.line, range.from.ch + 1);
+            
+        console.log( "De/Para: ", cursorPos, range);
     }
 
 
